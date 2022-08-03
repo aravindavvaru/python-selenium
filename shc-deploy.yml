@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selenium-chrome
+  labels:
+    app: selenium-chrome
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selenium-chrome
+  template:
+    metadata:
+      labels:
+        app: selenium-chrome
+    spec:
+      containers:
+      - name: selenium-chrome
+        image: selenium/standalone-chrome
+        ports:
+          - containerPort: 4444
+        resources:
+          limits:
+            memory: "1000Mi"
+            cpu: ".5"
+        livenessProbe:
+          httpGet:
+            path: /wd/hub/status
+            port: 4444
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /wd/hub/status
+            port: 4444
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+#      - name: harness
+#        image: localhost:5000/harness
+#        imagePullPolicy: Never
+

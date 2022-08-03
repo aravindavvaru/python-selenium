@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: harness
+  labels:
+    app: harness
+spec:
+  containers:
+    - name: harness
+      image: localhost:5000/harness
+      imagePullPolicy: Never

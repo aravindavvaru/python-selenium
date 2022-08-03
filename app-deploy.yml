@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: harness-test
+spec:
+  template:
+    metadata:
+      name: harness-test
+    spec:
+      containers:
+      - name: harness-test
+        image: localhost:5000/harness
+      restartPolicy: Never
